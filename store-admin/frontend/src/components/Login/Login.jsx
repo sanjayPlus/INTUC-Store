@@ -42,10 +42,8 @@ function Login() {
         <div className="row w-100 mx-0 auth-page">
           <div className="col-md-8 col-xl-6 mx-auto">
             <div className="card">
-              <div className="row">
-                <div className="col-md-4 pe-md-0">
-                  <div className="auth-side-wrapper"></div>
-                </div>
+              <div className="row login-row">
+               
                 <div className="col-md-8 ps-md-0">
                   <div className="auth-form-wrapper px-4 py-5">
                    

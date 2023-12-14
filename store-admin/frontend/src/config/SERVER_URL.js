@@ -2,7 +2,7 @@
 // const SERVER_URL = "https://award-store.onrender.com/api"
 
 
-const SERVER_URL = "http://54.198.70.181/api"
+const SERVER_URL = "http://store.intucthrissur.com/api"
 
 
 export default SERVER_URL;
