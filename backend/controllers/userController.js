@@ -500,7 +500,7 @@ const getOrders = async (req, res) => {
         const newProduct = await Product.findById(order.product.productId);
         return {
           product: newProduct,
-          quantity: order.quantity,  // Corrected: Access quantity from order
+          quantity: order.product.quantity,  // Corrected: Access quantity from order
           price: order.product.quantity*newProduct.price,
           status: order.status,
           date: order.date,
