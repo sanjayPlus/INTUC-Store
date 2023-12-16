@@ -15,16 +15,18 @@ function Register() {
       toast.error("Please fill all the data");
       return
     }
-    if(password.length<6){
-      toast.error("Password must be atleast 6 characters");
-      return
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
     }
-    // password must contain special symbols,lowercase,uppercase,numbers
-    const re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-    if(!re.test(password)){
-      toast.error("Password must contain special symbols,lowercase,uppercase,numbers");
-      return
+    
+    // Password must contain at least one uppercase letter, one lowercase letter, and one digit
+    const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    if (!re.test(password)) {
+      toast.error("Password must contain at least one uppercase letter, one lowercase letter, and one digit");
+      return;
     }
+    
     //register user
     axios.post(SERVER_URL+"/user/register",{
         username:name,
