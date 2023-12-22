@@ -56,14 +56,13 @@ const handleForgotPassword=()=>{
     })
     .then((res) => {
       if (res.status === 200) {
-        alert(res.data.message);
+       toast.success("Password reset link sent to your email address")
       } else {
-        alert(res.data.message);
+        toast.error("Something went wrong");
       }
     })
-    .catch((err) => {
-      toast.error("Something went wrong")
-      console.log(err);
+    .catch(() => {
+      toast.error("Something went wrong");
     });
 }
   return (
@@ -75,7 +74,7 @@ const handleForgotPassword=()=>{
   
             <input type="text" placeholder="Email" onChange={(e)=>setEmail(e.target.value)}/>
             <input type="password" placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/>
-            <h6 onClick={ handleForgotPassword}>Forgot Password ?</h6>
+            <h6 onClick={ handleForgotPassword} className="" >Forgot Password ?</h6>
             <button type="submit" onClick={handleSubmit}>Login</button>
             <p onClick={()=> navigate("/register")}>Don&apos;t Have An Account?&nbsp;<strong>Register</strong></p>
         
