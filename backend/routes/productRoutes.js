@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
 router.get("/all", productController.getAllProducts);
 router.get("/all-with-pagination", productController.getAllProductsWithPagination);
 router.get("/single/:id", productController.getProductById);
-router.get("/product-with-size/:size/:id", productController.getProductByIdWithSize);
+router.get("/product-with-size/:size/:name", productController.getProductByIdWithSize);
 router.post("/create",upload,adminAuth,productController.createProduct);//add admin auth
 router.post("/update",upload,adminAuth, productController.updateProduct);//add admin auth
 router.delete("/delete/:id",adminAuth, productController.deleteProduct);//add admin auth
