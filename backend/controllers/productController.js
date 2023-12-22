@@ -119,11 +119,38 @@ const deleteProduct = async (req, res) => {
     }
 
 }
+const getProductByIdWithSize = async (req, res) => {
+    try {
+        // Get the product by ID
+        const product = await Product.findById(req.params.id);
+
+        if (!product) {
+            return res.status(404).json({ error: "Product not found" });
+        }
+
+        // Extract the base title before the first space
+        const baseTitle = product.title.split(' ')[0];
+
+        // Find other products with similar base titles and sizes
+        const similarProducts = await Product.find({
+            title: new RegExp(`^${baseTitle}`),  // Using RegExp to match base title
+            size: { $in: ["(M)", "(S)", "(L)", "(XL)"] }
+        });
+        //get product id of size
+        const productWithSize = similarProducts.filter((product) => product.size === req.params.size);
+        res.status(200).json(productWithSize);
+    } catch (error) {
+        console.error("Error getting product:", error.message);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
 module.exports = {
     getAllProducts,
     getProductById,
     createProduct,
     updateProduct,
     deleteProduct,
-    getAllProductsWithPagination
+    getAllProductsWithPagination,
+    getProductByIdWithSize
 }
