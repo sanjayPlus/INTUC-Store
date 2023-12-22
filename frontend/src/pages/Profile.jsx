@@ -48,6 +48,7 @@ function Profile() {
   })
   return (
     <>
+    
   <div className="container">
     <Navbar active={"profile"}/>
     <div className="profile-container">

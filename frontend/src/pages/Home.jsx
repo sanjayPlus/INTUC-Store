@@ -57,7 +57,6 @@ function Home() {
     axios.get(SERVER_URL+"/products/all").then((res)=>{
       if(res.status===200){
     setProducts(res.data);
-console.log(res.data);
       }
     }).catch((err)=>{
       console.log(err);

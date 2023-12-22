@@ -11,7 +11,17 @@ function Card({product,handleAddCart}) {
         </div>
         <div className="card-content">
             <h1>{product?.name}</h1>
-            <p>{product?.description}</p>
+            <div className="card-container-middle">
+                
+            </div>
+            <p className="card-price"><i className="fa-solid fa-indian-rupee-sign"></i>{product?.price}</p>
+            <div className="card-rating">
+            <i className="fa-solid fa-star"></i>
+            <i className="fa-solid fa-star"></i>
+            <i className="fa-solid fa-star"></i>
+            <i className="fa-solid fa-star"></i>
+            <i className="fa-regular fa-star"></i>
+            </div>
         </div>
             <div className="card-buttons">
                 <button className="add-to-cart" onClick={()=>handleAddCart(product._id)}>Add to cart</button>

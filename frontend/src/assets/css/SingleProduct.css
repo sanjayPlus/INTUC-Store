@@ -73,6 +73,10 @@
     width: 100%;
     border-radius: 10px;
 }
+.size-container{
+    display: flex;
+    gap: 20px;
+}
 @media screen and (max-width:767px) {
     .single-product-container{
         display: flex;

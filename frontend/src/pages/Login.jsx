@@ -74,7 +74,7 @@ const handleForgotPassword=()=>{
   
             <input type="text" placeholder="Email" onChange={(e)=>setEmail(e.target.value)}/>
             <input type="password" placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/>
-            <h6 onClick={ handleForgotPassword} className="" >Forgot Password ?</h6>
+            <h6 onClick={ handleForgotPassword} className="forgot-pass" >Forgot Password ?</h6>
             <button type="submit" onClick={handleSubmit}>Login</button>
             <p onClick={()=> navigate("/register")}>Don&apos;t Have An Account?&nbsp;<strong>Register</strong></p>
         

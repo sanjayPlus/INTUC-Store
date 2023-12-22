@@ -14,6 +14,7 @@ import Otp from "./pages/Otp";
 import EditShipping from "./pages/EditShipping";
 import ForgetPassword from "./pages/ForgetPassword";
 import{ Toaster } from 'react-hot-toast';
+import Token from "./pages/Token";
 function App() {
 
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/edit-shipping" element={<EditShipping/>} />
         <Route path="/forget-password/:token" element={<ForgetPassword/>} />
         <Route path="/otp" element={<Otp/>} />
+        <Route path="/token/:token" element={<Token/>} />
         <Route path="*" element={<Home />} />
       </Routes>
         <Toaster />
