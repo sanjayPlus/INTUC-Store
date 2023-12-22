@@ -3,6 +3,7 @@ const Admin = require("../models/Admin");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Product = require("../models/Products");
+const Carousel = require("../models/Carousel");
 const jwtSecret = process.env.JWT_ADMIN_SECRET;
 
 const adminLogin = async (req, res) => {
@@ -244,8 +245,26 @@ const getOrders = async (req, res) => {
     }
   };
   
-  
-  
+const addCarousel = async (req, res) => {
+    try {
+        const { href } = req.body;
+        const imageObj = req.file;
+        if (!image) {
+        return res
+            .status(400)
+            .json({ error: "Please provide all required fields." });
+        }
+        const newCarousel = new Carousel({
+        image:process.env.DOMAIN+"/public/"+imageObj.filename,
+        href:href,
+        });
+        const savedCarousel = await newCarousel.save();
+        res.status(200).json(savedCarousel);
+    } catch (error) {
+        console.error("Error adding carousel:", error.message);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
   
 
 module.exports = {
@@ -256,5 +275,6 @@ module.exports = {
     deleteUser,
     getAllOrders,
     getOrders,
-    updateOrderStatus
+    updateOrderStatus,
+    addCarousel
 } 

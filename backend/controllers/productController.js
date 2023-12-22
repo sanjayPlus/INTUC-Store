@@ -118,7 +118,7 @@ const getProductByIdWithSize = async (req, res) => {
   try {
     // Get the name from request parameters
     const nameSubstring = req.params.name;
-
+    console.log(nameSubstring)
     // Use a regular expression to find products with names containing the substring
     const products = await Product.find({
       name: { $regex: new RegExp(nameSubstring, "i") },

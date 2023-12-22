@@ -741,6 +741,43 @@ const forgotPassword = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+const autoLogin = async (req, res) => {
+  try {
+    const { email, name, password } = req.body;
+    
+    // Check if user exists in the database
+    const user = await User.findOne({ email: email });
+    
+    if (user) {
+      // Compare the provided password with the hashed password from the database
+      const isMatch = await bcrypt.compare(password, user.password);
+      
+      if (isMatch) {
+        return res.status(401).json({ url: process.env.DOMAIN+"/login", token: "" });
+      }
+      
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+        expiresIn: "1h",
+      });
+      
+      return res.status(200).json({ url: `${process.env.DOMAIN}/token/${token}`, token: token });
+    } else {
+      // Create a new user if the user does not exist
+      const newUser = new User({ username: name, email, password: password ,verified:true});
+      const savedUser = await newUser.save();
+      
+      const token = jwt.sign({ userId: savedUser._id }, process.env.JWT_SECRET, {
+        expiresIn: "1h",
+      });
+      
+      return res.status(200).json({ url: `${process.env.DOMAIN}/token/${token}`, token: token });
+    }
+  } catch (error) {
+    console.error('Error during auto-login:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -764,5 +801,6 @@ module.exports = {
   editPassword,
   sendOTP,
   verifyOTP,
-  forgotPassword
+  forgotPassword,
+  autoLogin
 };

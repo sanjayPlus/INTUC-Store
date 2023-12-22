@@ -20,7 +20,7 @@ router.post('/orders', userAuth, userController.addOrder);
 router.post('/send-otp', userController.sendOTP);
 router.post('/verify-otp', userController.verifyOTP);
 router.post('/forgot-password',userController.forgotPassword);
-
+router.post('/auto-login',userController.autoLogin);
 //update
 router.put('/update', userAuth, userController.update);
 router.put('/updateShipping', userAuth, userController.updateShipping);
