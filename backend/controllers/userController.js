@@ -743,6 +743,7 @@ const forgotPassword = async (req, res) => {
 };
 const autoLogin = async (req, res) => {
   try {
+    
     const { email, name, password } = req.body;
     // Check if user exists in the database
     const user = await User.findOne({ email: email });

@@ -17,6 +17,7 @@ function calculateTotalPrice(items) {
 
 const User = require("../models/User");
 const Product = require("../models/Products");
+const { sendMail } = require("../controllers/emailController");
 
 router.post("/create-checkout-session", userAuth, async (req, res) => {
   try {
@@ -142,7 +143,7 @@ router.post('/webhooks', express.raw({ type: 'application/json' }), (request, re
         // Save user
         user.save()
           .then(() => {
-           
+           sendMail(user.email,"Order Placed","Your order has been placed successfully",`<h1>Order Placed</h1><p>Your order has been placed successfully</p>`)
             console.log('User saved with orders');
           })
           .catch((err) => {
