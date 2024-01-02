@@ -63,9 +63,7 @@ function Payment() {
         "x-access-token": localStorage.getItem("token"),
       },
     }).then((res)=>{
-      if (res.status === 200 && res.data && res.data.url) {
-        window.location.replace(res.data.url);
-      }
+    console.log(res.data)
       
     }).catch((err)=>{
       console.log(err);
