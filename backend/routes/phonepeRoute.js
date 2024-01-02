@@ -15,13 +15,11 @@ const  jwtSecret = process.env.JWT_SECRET;
 function calculateTotalPrice(items) {
   let totalPrice = 0;
   for (const item of items) {
-    const product = items.find((p) => p.id === item.id);
-    if (product) {
-      totalPrice += product.price * item.quantity;
-    }
+    totalPrice += item.price * item.quantity;
   }
   return totalPrice;
 }
+
 router.get('/checkout/:phone',userAuth,async (req, res) => {
     try {
       const  phone = req.params.phone;
@@ -94,7 +92,6 @@ router.get('/checkout/:phone',userAuth,async (req, res) => {
           request: payloadMain
         }
       };
-      console.log(payload)
       const response = await axios(options);
       return res.status(200).json({url:response.data.data.instrumentResponse.redirectInfo.url});
     } catch (error) {
