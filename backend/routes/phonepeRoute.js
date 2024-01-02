@@ -98,6 +98,7 @@ router.get('/checkout/:phone',userAuth,async (req, res) => {
       const response = await axios(options);
       return res.status(200).json({url:response.data.data.instrumentResponse.redirectInfo.url});
     } catch (error) {
+      console.log(error);
       res.status(500).send({
         message: error.message,
         success: false
