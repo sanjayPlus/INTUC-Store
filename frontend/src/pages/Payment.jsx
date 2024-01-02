@@ -7,8 +7,8 @@ import Navbar from "../components/Navbar";
 function Payment() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
+  // const [showModal, setShowModal] = useState(false);
+  // const [phoneNumber, setPhoneNumber] = useState("");
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -53,12 +53,12 @@ function Payment() {
     return acc+product.product.price*product.quantity;
   },0)
   const handleSubmit = () => {
-    if (!phoneNumber) {
-      // Show modal to get phone number if it's empty
-      setShowModal(true);
-      return; // Prevent further execution
-    }
-    axios.get(SERVER_URL + "/phonepe/checkout/"+phoneNumber,{
+    // if (!phoneNumber) {
+    //   // Show modal to get phone number if it's empty
+    //   setShowModal(true);
+    //   return; // Prevent further execution
+    // }
+    axios.get(SERVER_URL + "/phonepe/checkout",{
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
@@ -70,11 +70,11 @@ function Payment() {
       console.log(err);
     })
   };
-  const handleModalSubmit = () => {
-    // When the modal's submit button is clicked
-    setShowModal(false); // Close modal
-    handleSubmit(); // Proceed with payment logic
-  };
+  // const handleModalSubmit = () => {
+  //   // When the modal's submit button is clicked
+  //   setShowModal(false); // Close modal
+  //   handleSubmit(); // Proceed with payment logic
+  // };
 
   return (
     <>
@@ -122,7 +122,7 @@ function Payment() {
                 <button
                   className="button-27"
                   role="button"
-                  onClick={() => setShowModal(true)}
+                  onClick={handleSubmit}
                 >
                   Pay Now
                 </button>
@@ -130,7 +130,7 @@ function Payment() {
             </div>
           </div>
         </div>
-      {showModal && (
+      {/* {showModal && (
         <div className="modal">
           <div className="modal-content">
             <h2>Enter Phone Number</h2>
@@ -143,7 +143,7 @@ function Payment() {
             <button onClick={handleModalSubmit}>Submit</button>
           </div>
         </div>
-      )}
+      )} */}
       </div>
     </>
   );
