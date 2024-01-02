@@ -7,7 +7,8 @@ import Navbar from "../components/Navbar";
 function Payment() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  // const [showModal, setShowModal] = useState(false);
+  const [url, setUrl] = useState("");
+  const [showModal, setShowModal] = useState(false);
   // const [phoneNumber, setPhoneNumber] = useState("");
 
   useEffect(() => {
@@ -63,8 +64,8 @@ function Payment() {
         "x-access-token": localStorage.getItem("token"),
       },
     }).then((res)=>{
-    console.log(res.data)
-      
+    setUrl(res.data.url)
+      setShowModal(true);
     }).catch((err)=>{
       console.log(err);
     })
@@ -129,20 +130,21 @@ function Payment() {
             </div>
           </div>
         </div>
-      {/* {showModal && (
+      {showModal && (
         <div className="modal">
           <div className="modal-content">
-            <h2>Enter Phone Number</h2>
+            {/* <h2>Enter Phone Number</h2>
             <input
               type="text"
               placeholder="Phone Number"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
-            <button onClick={handleModalSubmit}>Submit</button>
+            <button onClick={handleModalSubmit}>Submit</button> */}
+            <a href={url}><button>Pay Now</button></a>
           </div>
         </div>
-      )} */}
+      )}
       </div>
     </>
   );
