@@ -94,7 +94,7 @@ router.get('/checkout/:phone',userAuth,async (req, res) => {
           request: payloadMain
         }
       };
-  
+      console.log(payload)
       const response = await axios(options);
       return res.status(200).json({url:response.data.data.instrumentResponse.redirectInfo.url});
     } catch (error) {
