@@ -9,6 +9,7 @@ const  jwt = require('jsonwebtoken');
 const { sendMail } = require('../controllers/emailController');
 const Payment = require('../models/Payment');
 const Product = require('../models/Products');
+const mongoose = require('mongoose');
 
 const  jwtSecret = process.env.JWT_SECRET;
 function calculateTotalPrice(items) {
@@ -104,7 +105,7 @@ router.get('/checkout/:phone',userAuth,async (req, res) => {
     }
   });
 
-router.get('/status/:transactionId/:merchantId/:amount/:userId', async (req, res) => {
+router.post('/status/:transactionId/:merchantId/:amount/:userId', async (req, res) => {
 
     const merchantTransactionId = req.params.transactionId
       const merchantId = req.params.merchantId
@@ -140,7 +141,8 @@ router.get('/status/:transactionId/:merchantId/:amount/:userId', async (req, res
                 const  paymentAmount = response.data.data.amount/100;
                 const  payment  = await Payment.findOne({merchantTransactionId})
                 if(payment){
-                    return res.status(200).json({message:"Payment Already Completed"});
+                 const url = `${process.env.PHONEPAY_REDIRECT_URL}/api/payment/success`
+                    return res.redirect(url);
                 }
                 const items = user.cart;
                 const itemIds = items.map((item) => item.productId);
@@ -174,7 +176,7 @@ router.get('/status/:transactionId/:merchantId/:amount/:userId', async (req, res
 
                 })
                 itemsWithQuantity.map((item)=>{
-                  Product.findById(item.productId).then((product)=>{
+                  Product.findById(item._id).then((product)=>{
                     product.stocks = product.stocks - item.quantity;
                     product.save();
                   
@@ -228,7 +230,7 @@ router.get('/status/:transactionId/:merchantId/:amount/:userId', async (req, res
   })
   
   router.get("/success", (req, res) => {
-    res.redirect('https://intucthrissur.com');
+    res.redirect('https://store.intucthrissur.com');
   })
   router.get("/failure", (req, res) => {
     res.send("Payment Failed");
