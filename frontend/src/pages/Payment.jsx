@@ -64,7 +64,7 @@ function Payment() {
       },
     }).then((res)=>{
       if(res.status === 200){
-        window.open(res.data.url, '_blank');
+        window.location.href = res.data.url;
       }
     }).catch((err)=>{
       console.log(err);
