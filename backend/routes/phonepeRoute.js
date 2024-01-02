@@ -56,7 +56,7 @@ router.get('/checkout/:phone',userAuth,async (req, res) => {
         merchantId: process.env.MERCHANT_ID,
         merchantTransactionId: merchantTransactionId,
         merchantUserId: "MUID" + Date.now(),
-        name: user.name,
+        name: user.username,
         amount: totalPrice * 100,
         redirectUrl:
           process.env.PHONEPAY_REDIRECT_URL +
