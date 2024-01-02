@@ -69,7 +69,7 @@ router.get('/checkout/:phone',userAuth,async (req, res) => {
           "/" +
           req.user.userId,
         redirectMode: 'GET',
-        mobileNumber: user.phoneNumber, // corrected property name 'phone' to 'phoneNumber'
+        mobileNumber: phone, // corrected property name 'phone' to 'phoneNumber'
         paymentInstrument: {
           type: 'PAY_PAGE'
         }
@@ -233,7 +233,7 @@ router.post('/status/:transactionId/:merchantId/:amount/:userId', async (req, re
     res.redirect('https://store.intucthrissur.com');
   })
   router.get("/failure", (req, res) => {
-    res.send("Payment Failed");
+    res.send("https://store.intucthrissur.com");
   })
   router.get('/payment-details/:page/:limit', adminAuth, async (req, res) => {
     const page = parseInt(req.params.page);
