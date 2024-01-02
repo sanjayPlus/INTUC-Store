@@ -20,16 +20,16 @@ function calculateTotalPrice(items) {
   return totalPrice;
 }
 
-router.get('/checkout/:phone',userAuth,async (req, res) => {
+router.get('/checkout',userAuth,async (req, res) => {
     try {
-      const  phone = req.params.phone;
+    
 
       const user = await User.findById(req.user.userId);
 
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
-      user.phoneNumber = phone;
+      
       await user.save();
       const merchantTransactionId = crypto.randomBytes(16).toString('hex');
       const items = user.cart;
@@ -54,7 +54,7 @@ router.get('/checkout/:phone',userAuth,async (req, res) => {
         merchantId: process.env.MERCHANT_ID,
         merchantTransactionId: merchantTransactionId,
         merchantUserId: "MUID" + Date.now(),
-        name: user.username,
+        name:user.shippingAddress.name,
         amount: totalPrice * 100,
         redirectUrl:
           process.env.PHONEPAY_REDIRECT_URL +
@@ -67,7 +67,7 @@ router.get('/checkout/:phone',userAuth,async (req, res) => {
           "/" +
           req.user.userId,
         redirectMode: 'GET',
-        mobileNumber: phone, // corrected property name 'phone' to 'phoneNumber'
+        mobileNumber: user.shippingAddress.phoneNumber, // corrected property name 'phone' to 'phoneNumber'
         paymentInstrument: {
           type: 'PAY_PAGE'
         }
