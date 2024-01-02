@@ -231,7 +231,7 @@ router.post('/status/:transactionId/:merchantId/:amount/:userId', async (req, re
   })
   
   router.get("/success", (req, res) => {
-    res.redirect('https://store.intucthrissur.com');
+    res.redirect('https://store.intucthrissur.com/orders');
   })
   router.get("/failure", (req, res) => {
     res.send("https://store.intucthrissur.com");
