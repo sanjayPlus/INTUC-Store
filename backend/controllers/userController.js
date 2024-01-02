@@ -170,7 +170,7 @@ const addCart = async (req, res) => {
           quantity: 1,
         });
         await user.save();
-        res.status(200).json(user);
+        res.status(200).json(user.cart);
       } else {
         // If the product is out of stock or doesn't exist, send an error response
         res.status(400).json({ error: "Product is out of stock" });

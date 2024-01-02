@@ -6,6 +6,7 @@ const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
+const phonepeRoute = require('./routes/phonepeRoute');
 const adminRoutes = require('./routes/adminRoutes');
 const app = express();
 const path = require("path")
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use('/api/user', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/phonepe',phonepeRoute);
 app.get("/admin/store-admin", (req, res) => {
   res.sendFile(path.join(__dirname,'..','store-admin', "dist", "index.html"));
 });

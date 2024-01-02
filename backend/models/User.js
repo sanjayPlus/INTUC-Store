@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  phoneNumber: {
+    type: String,
+    default: '',
+  },
   cart:[
     {
       productId:String,
@@ -44,6 +48,13 @@ const userSchema = new mongoose.Schema({
     default:""
   
   },
+  payments:[{
+    paymentId:String,
+    merchantId:String,
+    merchantTransactionId:String,
+    amount:Number,
+    date: { type: Date, default: Date.now },
+  }]
 });
 
 const User = mongoose.model('User', userSchema);
