@@ -197,13 +197,12 @@ router.post('/status/:transactionId/:merchantId/:amount/:userId', async (req, re
               sendMail(email, "Payment Successful", "Payment Successful", `<div>
               <h1 style="text-align:center">Payment Successful</h1>
               <br>
-              <p>Dear ${name},</p>
+              <p>Dear ${user.shippingAddress.name},</p>
               <br>
               <p>Thankyou for your Contribution to INTUC Thrissur</p>
               <p>Your Payment Details</p>
               <br>
               <p>Your transaction Id is ${merchantTransactionId}</p>
-              <p>Email ${name}</p>
               <p>Amount ${amount}</p>
               <p>Email ${email}</p>
               <p>Phone ${phoneNumber}</p>
