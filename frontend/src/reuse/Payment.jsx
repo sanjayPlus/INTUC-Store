@@ -7,9 +7,6 @@ import Navbar from "../components/Navbar";
 function Payment() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  // const [showModal, setShowModal] = useState(false);
-  // const [phoneNumber, setPhoneNumber] = useState("");
-
   useEffect(() => {
     if (localStorage.getItem("token")) {
       axios
@@ -53,29 +50,20 @@ function Payment() {
     return acc+product.product.price*product.quantity;
   },0)
   const handleSubmit = () => {
-    // if (!phoneNumber) {
-    //   // Show modal to get phone number if it's empty
-    //   setShowModal(true);
-    //   return; // Prevent further execution
-    // }
-    axios.get(SERVER_URL + "/phonepe/checkout",{
+    axios.post(SERVER_URL + "/payment/create-checkout-session",{
+      hello:"hello"
+    },{
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
     }).then((res)=>{
       if(res.status === 200){
-        window.location.href = res.data.url
+        window.location.href = res.data.url;
       }
     }).catch((err)=>{
       console.log(err);
     })
   };
-  // const handleModalSubmit = () => {
-  //   // When the modal's submit button is clicked
-  //   setShowModal(false); // Close modal
-  //   handleSubmit(); // Proceed with payment logic
-  // };
-
   return (
     <>
       <div className="container">
@@ -130,20 +118,6 @@ function Payment() {
             </div>
           </div>
         </div>
-      {/* {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2>Enter Phone Number</h2>
-            <input
-              type="text"
-              placeholder="Phone Number"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-            />
-            <button onClick={handleModalSubmit}>Submit</button>
-          </div>
-        </div>
-      )} */}
       </div>
     </>
   );

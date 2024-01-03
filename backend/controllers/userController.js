@@ -170,7 +170,7 @@ const addCart = async (req, res) => {
           quantity: 1,
         });
         await user.save();
-        res.status(200).json(user);
+        res.status(200).json(user.cart);
       } else {
         // If the product is out of stock or doesn't exist, send an error response
         res.status(400).json({ error: "Product is out of stock" });
@@ -193,21 +193,27 @@ const getCart = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    const products = await Promise.all(
-      user.cart.map(async (item) => {
-        const product = await Product.findById(item.productId);
-        let stockStatus = true
-        if(product.stocks<=item.quantity){
-          stockStatus = false
-        }
-        return {
-          product: product,
-          productId: product._id,
-          quantity: item.quantity,
-          stockStatus:stockStatus,
-        };
-      })
-    );
+    const products = [];
+    for (const item of user.cart) {
+      const product = await Product.findById(item.productId);
+
+      // Check if the product is found
+      if (!product) {
+        return res.status(404).json({ error: `Product not found for ID: ${item.productId}` });
+      }
+
+      let stockStatus = true;
+      if (product.stocks <= item.quantity) {
+        stockStatus = false;
+      }
+
+      products.push({
+        product: product,
+        productId: product._id,
+        quantity: item.quantity,
+        stockStatus: stockStatus,
+      });
+    }
 
     res.status(200).json(products);
   } catch (error) {
@@ -215,8 +221,6 @@ const getCart = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
-
 const reduceCart = async (req, res) => {
   try {
     const { productId } = req.body;

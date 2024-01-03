@@ -1,5 +1,5 @@
 .navbar{
-    background-color: #2d2c2c;
+    background-color:var(--white);
     border-bottom: 1px solid #e6e6e6;
     border-radius: 0;
     margin-bottom: 0;
@@ -11,6 +11,9 @@
     z-index: 1030;
     display: flex;
     justify-content: center;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  
 }
 
 .navbar ul{
@@ -21,7 +24,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 4rem;
+
 
 }
 .navbar ul li a{
@@ -32,15 +36,20 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: .5rem;
+    gap: 1rem;
     text-decoration: none;
     color:var(--white);
 }
-
+.navbar ul li a.active svg path{
+    fill:#000073;
+}
 @media screen and (max-width: 768px){
-
+.navbar{
+border-radius: 20px 20px 0 0 ;
+  
+}
 .navbar ul{
-    gap: 1.5rem;
+    gap: 3.8rem;
 }
 .navbar ul li a{
     display: flex;
@@ -51,8 +60,8 @@
 
 }
 
-.navbar ul li a.active{
-    color: #98a5d5;
+.navbar ul li a.active svg{
+    fill: #98a5d5;
 }
 .navbar ul li p{
 margin:0;
