@@ -23,13 +23,16 @@ const storage = multer.diskStorage({
 router.get('/user/:id',adminAuth,adminController.getUser);
 router.get('/users',adminAuth,adminController.getAllUsers);    
 router.get('/orders',adminAuth,adminController.getAllOrders);
+router.get('/carousel',adminController.getCarousel);
 
 router.post('/login',adminController.adminLogin);
 // router.post('/register',adminController.adminRegister);//comment this route after creating admin
 router.post('/update-order-status',adminAuth,adminController.updateOrderStatus);
 router.post('/carousel',upload,adminAuth,adminController.addCarousel);
+
+
 router.get('/orders/:userId',adminAuth,adminController.getOrders);
 router.delete('/delete-user/:id',adminAuth,adminController.deleteUser);
-
+router.delete('/carousel/:id',adminAuth,adminController.deleteCarousel);
 
 module.exports = router;

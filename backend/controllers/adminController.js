@@ -265,7 +265,30 @@ const addCarousel = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
-  
+const deleteCarousel = async (req, res) => {
+    try {
+        const carousel = await Carousel.findOneAndDelete({ _id: req.params.id });
+        
+        if (!carousel) {
+            // If the user with the specified ID is not found
+            return res.status(404).json({ error: "Carousel not found" });
+        }
+
+        res.status(200).json({ msg: "Carousel removed" });
+    } catch (error) {
+        console.error("Error deleting carousel:", error.message);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+const getCarousel = async (req, res) => {
+    try {
+        const carousel = await Carousel.find({});
+        res.status(200).json(carousel);
+    } catch (error) {
+        console.error("Error getting carousel:", error.message);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}  
 
 module.exports = {
     adminLogin,
@@ -276,5 +299,7 @@ module.exports = {
     getAllOrders,
     getOrders,
     updateOrderStatus,
-    addCarousel
+    addCarousel,
+    deleteCarousel,
+    getCarousel
 } 
