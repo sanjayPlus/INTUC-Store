@@ -209,21 +209,23 @@ router.post(
 
             const htmlContent = sendMail(
               email,
-              "Payment Successful",
-              "Payment Successful",
+              "Order Payment Successful",
+              "Order Payment Successful",
               `<div>
               <h1 style="text-align:center">Payment Successful</h1>
               <br>
               <p>Dear ${user.shippingAddress.name},</p>
               <br>
-              <p>Thankyou for your Contribution to INTUC Thrissur</p>
+              <p>Your Order Have been Placed</p>
               <p>Your Payment Details</p>
               <br>
               <p>Your transaction Id is ${merchantTransactionId}</p>
               <p>Amount ${amount}</p>
               <p>Email ${email}</p>
               <p>Phone ${phoneNumber}</p>
+              
                   <br>
+
               <p>For App Support Contact app@intucthrisssur.com </p>
               <br>
               <p>Sincerely,</p>

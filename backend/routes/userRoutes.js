@@ -21,6 +21,7 @@ router.post('/send-otp', userController.sendOTP);
 router.post('/verify-otp', userController.verifyOTP);
 router.post('/forgot-password',userController.forgotPassword);
 router.post('/auto-login',userController.autoLogin);
+
 //update
 router.put('/update', userAuth, userController.update);
 router.put('/updateShipping', userAuth, userController.updateShipping);
@@ -28,7 +29,6 @@ router.put('/updateOrders', userAuth, userController.updateOrder);
 router.put('/edit-password', userAuth, userController.editPassword);
 
 //delete
-
 router.delete('/delete', userAuth, userController.deleteUser);
 router.delete('/deleteCart/:productId', userAuth, userController.deleteCart);
 router.delete('/deleteShipping/:shippingAddressId ', userAuth, userController.deleteShipping);
