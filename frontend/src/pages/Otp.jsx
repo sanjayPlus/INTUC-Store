@@ -7,7 +7,7 @@ import axios from 'axios';
 
 function Otp() {
   const navigate = useNavigate();
-  const [otp, setOtp] = useState(0);
+  const [otp, setOtp] = useState(null);
   const [email, setEmail] = useState("");
   const [isOtpSend, setIsOtpSend] = useState(false);
   useEffect(() => {
